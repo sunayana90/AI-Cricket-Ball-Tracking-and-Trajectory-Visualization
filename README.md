@@ -1,28 +1,28 @@
-# 🎯 AI-Cricket-Ball-Tracking-and-Trajectory-Visualization system
+# 🎯 AI Cricket Ball Tracking and Trajectory Visualization System
 
-A computer vision project that detects, tracks, and visualizes the trajectory of a fast-moving ball using deep learning and Kalman filtering. The system generates a smooth Hawk-Eye/DRS-style trajectory overlay and exports the final annotated video.
+A computer vision project that detects, tracks, and visualizes the trajectory of a fast-moving cricket ball using deep learning and Kalman filtering. The system generates a smooth Hawk-Eye/DRS-style trajectory overlay and exports the final annotated video.
 
 ---
 
 ## 📌 Project Overview
 
-This project combines object detection, tracking, trajectory smoothing, and 3D-inspired rendering to create a broadcast-style ball tracking system similar to those used in cricket DRS and Hawk-Eye technologies.
+This project combines object detection, tracking, trajectory smoothing, and 3D-inspired rendering to create a broadcast-style ball tracking system similar to those used in Hawk-Eye and DRS technologies.
 
-The pipeline detects the ball in each frame, tracks its motion using a Kalman filter, removes outliers, smooths the trajectory, and finally overlays a visually appealing trajectory tube on the original video.
+The pipeline detects the ball in each frame, tracks its motion using a Kalman filter, removes outliers, smooths the trajectory, and overlays a visually appealing trajectory tube onto the original video.
 
 ---
 
 ## ✨ Features
 
-- ⚡ Fast ball detection using YOLO
-- 🎯 Kalman Filter based object tracking
+- ⚡ Cricket ball detection using YOLO
+- 🎯 Kalman Filter based tracking
 - 🧹 Automatic outlier removal
-- 📈 Trajectory smoothing using Savitzky-Golay Filter and Splines
-- 🎥 Frame-by-frame rendering
-- 🏏 Hawk-Eye/DRS style trajectory visualization
+- 📈 Trajectory smoothing using Savitzky-Golay filtering and spline interpolation
+- 🏏 Hawk-Eye / DRS style trajectory visualization
 - 🌟 Perspective-based 3D effect
-- 📦 Generates final output video automatically
-- 🚀 Google Colab compatible
+- 🎥 Generates annotated output video automatically
+- 🚀 Designed for Google Colab
+- 🔥 GPU accelerated inference
 
 ---
 
@@ -56,32 +56,25 @@ Output Video
 ## 🛠️ Technologies Used
 
 ### Programming Language
-
 - Python
 
 ### Deep Learning
-
 - Ultralytics YOLO
 
 ### Computer Vision
-
 - OpenCV
 
 ### Tracking
-
 - FilterPy Kalman Filter
 
 ### Scientific Computing
-
 - NumPy
 - SciPy
 
 ### Visualization
-
 - Matplotlib
 
 ### Environment
-
 - Google Colab
 - Jupyter Notebook
 
@@ -91,11 +84,10 @@ Output Video
 
 ```text
 .
-├── input_video.mp4
-├── best.pt                 # YOLO trained weights
-├── notebook.ipynb
-├── output_video.mp4
-├── requirements.txt
+├── SportsVision_HawkEye.ipynb
+├── best.pt
+├── cricket clips 10.mp4
+├── output_drs_final.mp4
 └── README.md
 ```
 
@@ -105,9 +97,7 @@ Output Video
 
 ### 1. Ball Detection
 
-The ball is detected frame-by-frame using a YOLO model trained specifically for ball detection.
-
----
+The cricket ball is detected frame-by-frame using a YOLO model trained specifically for ball detection.
 
 ### 2. Kalman Filter Tracking
 
@@ -116,15 +106,11 @@ A 3D Kalman Filter estimates:
 - Position (x, y, z)
 - Velocity (vx, vy, vz)
 
-which helps maintain a smooth trajectory even when detections are missing.
-
----
+This allows the tracker to maintain smooth trajectories even when detections are temporarily lost.
 
 ### 3. Outlier Removal
 
-Large jumps and false detections are removed using distance constraints to ensure trajectory consistency.
-
----
+Large jumps and false detections are filtered out to ensure trajectory consistency.
 
 ### 4. Trajectory Smoothing
 
@@ -133,13 +119,11 @@ The raw trajectory is refined using:
 - Savitzky-Golay Filtering
 - Cubic Spline Interpolation
 
-to obtain a smooth curve.
-
----
+to generate a smooth curve.
 
 ### 5. Hawk-Eye Style Rendering
 
-A perspective-aware renderer generates a smooth trajectory tube with:
+A perspective-aware renderer generates a broadcast-style trajectory with:
 
 - Dynamic thickness
 - Depth effect
@@ -149,56 +133,54 @@ A perspective-aware renderer generates a smooth trajectory tube with:
 ---
 
 ## 📸 Sample Output
-<img width="1917" height="891" alt="image" src="https://github.com/user-attachments/assets/20559603-fbc2-415f-9df8-e3fea25caf51" />
 
-
-### Input
-
-- Original sports video
-
-### Output
-
-- Ball trajectory visualization with Hawk-Eye style overlay
+<img width="1917" height="891" src="https://github.com/user-attachments/assets/20559603-fbc2-415f-9df8-e3fea25caf51">
 
 ---
 
-## 📦 Installation
+## 🚀 Running on Google Colab
 
-Clone the repository:
+This notebook is designed to run on **Google Colab with GPU acceleration**.
 
-```bash
-git clone https://github.com/sunayana90/AI-Cricket-Ball-Tracking-and-Trajectory-Visualization.git
-cd hawkeye-ball-tracking
+### Enable GPU
+
+Go to:
+
+```text
+Runtime → Change runtime type → T4 GPU → Save
 ```
 
-Install dependencies:
+Verify GPU availability:
 
-```bash
-pip install -r requirements.txt
+```python
+import torch
+
+print(torch.cuda.is_available())
+print(torch.cuda.get_device_name(0))
 ```
 
 ---
 
 ## ▶️ Usage
 
-Run the notebook or script:
+1. Open `SportsVision_HawkEye.ipynb` in Google Colab.
+2. Enable GPU.
+3. Upload:
 
-```bash
-python main.py
-```
+- `best.pt`
+- Input cricket video
 
-or
-
-Open the notebook in Google Colab and execute all cells sequentially.
+4. Run all notebook cells sequentially.
+5. Download the generated output video.
 
 ---
 
-## Output
+## 📦 Output
 
-The generated video will be saved as:
+The final annotated video is saved as:
 
 ```text
-output_video.mp4
+output_drs_final.mp4
 ```
 
 ---
@@ -206,9 +188,7 @@ output_video.mp4
 ## Applications
 
 - Cricket DRS Visualization
-- Golf Ball Tracking
-- Tennis Ball Tracking
-- Baseball Trajectory Analysis
+- Ball Tracking
 - Sports Analytics
 - Broadcast Graphics
 - Computer Vision Research
@@ -220,17 +200,22 @@ output_video.mp4
 - True 3D mesh rendering
 - Multi-object tracking
 - Real-time inference
-- OpenGL-based visualization
-- Depth estimation using monocular vision
+- OpenGL-based rendering
+- Monocular depth estimation
 - Physics-based trajectory prediction
-- Camera calibration for accurate world coordinates
+- Camera calibration for world-coordinate reconstruction
 
 ---
 
 ## Author
 
 **Sunayana Yadav**
+
+B.E. EXTC, Lokmanya Tilak College of Engineering  
+AI & Computer Vision Enthusiast
+
 ---
 
 ## License
+
 This project is intended for educational and research purposes.
